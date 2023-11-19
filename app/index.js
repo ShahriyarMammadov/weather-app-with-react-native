@@ -25,60 +25,7 @@ export default function App() {
         style={styles.background}
       >
         <View style={styles.container}>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
-          <Text>Test</Text>
+          <Text style={{}}>London</Text>
         </View>
       </ImageBackground>
     </ScrollView>
@@ -104,5 +51,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    paddingTop: 180,
   },
 });
