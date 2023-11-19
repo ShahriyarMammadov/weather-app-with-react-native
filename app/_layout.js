@@ -6,22 +6,23 @@ const Layout = () => {
   return (
     <Stack
       screenOptions={{
-        title: "transparent",
+        title: "red",
         // headerStyle: {
-        //   backgroundColor: "green",
+        //   backgroundColor: "s",
         // },
-        // headerTintColor: "#fff",
-        // headerTitleStyle: {
-        //   fontWeight: "bold",
-        // },
-        headerBackground: () => (
-          <Image
-            source={{
-              uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBr35nsGltX_wIDUpo4TCQCXGHsnU1P9qUQ&usqp=CAU",
-            }}
-            style={{ width: "100%", height: "100%", resizeMode: "cover" }}
-          />
-        ),
+        headerTintColor: "#fff",
+        headerTitleStyle: {
+          fontWeight: "bold",
+        },
+        headerTransparent: true,
+        // headerBackground: () => (
+        //   <Image
+        //     source={{
+        //       uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBr35nsGltX_wIDUpo4TCQCXGHsnU1P9qUQ&usqp=CAU",
+        //     }}
+        //     style={{ width: "100%", height: "100%", resizeMode: "cover" }}
+        //   />
+        // ),
       }}
     />
   );
