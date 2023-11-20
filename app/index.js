@@ -1,5 +1,6 @@
+import axios from "axios";
 import { Link, Stack } from "expo-router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -16,16 +17,71 @@ import {
 } from "react-native";
 
 export default function App() {
+  const [currentWeather, setCurrentWeather] = useState(
+    require("../assets/images/sunny.png")
+  );
+
+  const [location, setLocation] = useState(null);
+
+  const [errorMsg, setErrorMsg] = useState(null);
+
+  const getLocation = async () => {
+    try {
+      let { status } = await Location.requestForegroundPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+        return;
+      }
+
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation(location);
+    } catch (error) {
+      setErrorMsg(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getLocation();
+  }, []);
+
+  console.log(location);
+
+  useEffect(() => {
+    const getWeatherData = async () => {
+      try {
+        const data = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${120}&lon=${140}&appid=121644eb7e360359ae4457fdf296252f`
+        );
+        // setWeatherData(data.data);
+        console.log(data);
+      } catch (error) {
+        alert(error);
+      }
+    };
+    // getWeatherData();
+    // location ? getWeatherData() : null;
+  }, []);
+
   return (
     <ScrollView>
       <ImageBackground
         source={{
-          uri: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFBr35nsGltX_wIDUpo4TCQCXGHsnU1P9qUQ&usqp=CAU",
+          uri: currentWeather,
         }}
         style={styles.background}
       >
         <View style={styles.container}>
           <Text style={{}}>London</Text>
+          <View>
+            <Text>
+              Location:{" "}
+              {location
+                ? `${location.coords.latitude}, ${location.coords.longitude}`
+                : "Unknown"}
+            </Text>
+            {errorMsg && <Text>Error: {errorMsg}</Text>}
+            <Button title="Get Location" onPress={getLocation} />
+          </View>
         </View>
       </ImageBackground>
     </ScrollView>
