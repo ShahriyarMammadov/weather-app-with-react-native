@@ -51,13 +51,17 @@ export default function App() {
           `https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=121644eb7e360359ae4457fdf296252f`
         );
         setWeatherData(data.data);
-        console.log(data.data.city);
+        console.log(data.data.list[0].main.feels_like);
       } catch (error) {
         alert(error);
       }
     };
     location ? getWeatherData() : null;
   }, [location]);
+
+  // weatherData.list.map((e) => {
+  //   console.log(e.weather);
+  // });
 
   return (
     <ScrollView>
@@ -68,6 +72,12 @@ export default function App() {
         <View style={styles.container}>
           <Text style={{}}>
             {weatherData?.city?.country}, {weatherData?.city?.name}
+          </Text>
+          <Text style={{}}>
+            {(weatherData?.list[0]?.main?.temp - 273.15).toFixed()}°C
+          </Text>
+          <Text style={styles.weatherDescription}>
+            {weatherData?.list[0]?.weather[0]?.description}
           </Text>
           <View>
             <Text>
@@ -105,5 +115,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingTop: 180,
+  },
+  weatherDescription: {
+    textTransform: "capitalize",
   },
 });
