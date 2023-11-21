@@ -2,6 +2,7 @@ import React from "react";
 import { Image } from "react-native";
 import { Stack } from "expo-router";
 import Footer from "./footer";
+import { StatusBar } from "expo-status-bar";
 
 const Layout = () => {
   return (
@@ -27,6 +28,7 @@ const Layout = () => {
           // ),
         }}
       />
+      <StatusBar barStyle="light-content" backgroundColor="red" />
       <Footer />
     </>
   );

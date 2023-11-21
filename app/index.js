@@ -21,9 +21,8 @@ export default function App() {
   const [currentWeather, setCurrentWeather] = useState(
     require("../assets/images/sunny.png")
   );
-
   const [location, setLocation] = useState(null);
-
+  const [weatherData, setWeatherData] = useState({});
   const [errorMsg, setErrorMsg] = useState(null);
 
   const getLocation = async () => {
@@ -45,34 +44,31 @@ export default function App() {
     getLocation();
   }, []);
 
-  console.log(location);
-
   useEffect(() => {
     const getWeatherData = async () => {
       try {
         const data = await axios.get(
           `https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=121644eb7e360359ae4457fdf296252f`
         );
-        // setWeatherData(data.data);
-        console.log(data);
+        setWeatherData(data.data);
+        console.log(data.data.city);
       } catch (error) {
         alert(error);
       }
     };
-    getWeatherData();
-    // location ? getWeatherData() : null;
-  }, []);
+    location ? getWeatherData() : null;
+  }, [location]);
 
   return (
     <ScrollView>
       <ImageBackground
-        source={{
-          uri: "../assets/images/sunny.png",
-        }}
+        source={require("../assets/images/sunny.png")}
         style={styles.background}
       >
         <View style={styles.container}>
-          <Text style={{}}>London</Text>
+          <Text style={{}}>
+            {weatherData?.city?.country}, {weatherData?.city?.name}
+          </Text>
           <View>
             <Text>
               Location:{" "}
