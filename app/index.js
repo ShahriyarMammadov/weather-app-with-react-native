@@ -15,6 +15,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
+import * as Location from "expo-location";
 
 export default function App() {
   const [currentWeather, setCurrentWeather] = useState(
@@ -50,7 +51,7 @@ export default function App() {
     const getWeatherData = async () => {
       try {
         const data = await axios.get(
-          `https://api.openweathermap.org/data/2.5/forecast?lat=${120}&lon=${140}&appid=121644eb7e360359ae4457fdf296252f`
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=121644eb7e360359ae4457fdf296252f`
         );
         // setWeatherData(data.data);
         console.log(data);
@@ -58,7 +59,7 @@ export default function App() {
         alert(error);
       }
     };
-    // getWeatherData();
+    getWeatherData();
     // location ? getWeatherData() : null;
   }, []);
 
@@ -66,7 +67,7 @@ export default function App() {
     <ScrollView>
       <ImageBackground
         source={{
-          uri: currentWeather,
+          uri: "../assets/images/sunny.png",
         }}
         style={styles.background}
       >
