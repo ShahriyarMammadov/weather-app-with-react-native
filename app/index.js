@@ -49,7 +49,7 @@ export default function App() {
         `https://api.openweathermap.org/data/2.5/forecast?lat=${location.coords.latitude}&lon=${location.coords.longitude}&appid=121644eb7e360359ae4457fdf296252f`
       );
       setWeatherData(data.data);
-      console.log(data.data.list[0].main.feels_like);
+      console.log(data.data);
       setRefreshing(false);
     } catch (error) {
       alert(error);
@@ -59,11 +59,11 @@ export default function App() {
   useEffect(() => {
     getLocation();
     location ? getWeatherData() : null;
-  }, []);
+  }, [location]);
 
   const onRefresh = () => {
     setRefreshing(true);
-    getWeatherData();
+    getLocation();
   };
 
   return (
@@ -73,7 +73,7 @@ export default function App() {
           refreshing={refreshing}
           onRefresh={onRefresh}
           tintColor="#3F51B5"
-          title="Yenileniyor..."
+          title="Download..."
         />
       }
     >
@@ -82,25 +82,32 @@ export default function App() {
         style={styles.background}
       >
         <View style={styles.container}>
-          <Text style={{ fontSize: 50 }}>
-            {/* {weatherData?.city?.country}, */}
+          <Text style={{ fontSize: 50, color: "white" }}>
             {weatherData?.city?.name}
           </Text>
-          <Text style={{ fontSize: 30 }}>
+          <Text style={{ fontSize: 40, color: "white" }}>
             {(weatherData?.list[0]?.main?.temp - 273.15).toFixed()}°C
           </Text>
-          <Text style={styles.weatherDescription}>
+          <Text
+            style={{
+              textTransform: "capitalize",
+              color: "white",
+              fontWeight: 700,
+              fontSize: 20,
+              paddingTop: 10
+            }}
+          >
             {weatherData?.list[0]?.weather[0]?.description}
           </Text>
           <View>
-            <Text>
+            {/* <Text>
               Location:{" "}
               {location
                 ? `${location.coords.latitude}, ${location.coords.longitude}`
                 : "Unknown"}
-            </Text>
+            </Text> */}
             {errorMsg && <Text>Error: {errorMsg}</Text>}
-            <Button title="Get Location" onPress={getLocation} />
+            {/* <Button title="Get Location" onPress={getLocation} /> */}
           </View>
         </View>
       </ImageBackground>
@@ -119,8 +126,5 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     width: Dimensions.get("window").width,
     height: Dimensions.get("window").height,
-  },
-  weatherDescription: {
-    textTransform: "capitalize",
   },
 });
