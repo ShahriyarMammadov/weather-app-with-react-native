@@ -78,7 +78,13 @@ export default function App() {
       }
     >
       <ImageBackground
-        source={require("../assets/images/sunny.png")}
+        source={
+          weatherData?.list[0]?.weather[0]?.description === "clear sky"
+            ? require("../assets/images/sunny.png")
+            : weatherData?.list[0]?.weather[0]?.description === "rainy"
+            ? require("../assets/images/rainy.png")
+            : require("../assets/images/snow.png")
+        }
         style={styles.background}
       >
         <View style={styles.container}>
@@ -94,7 +100,7 @@ export default function App() {
               color: "white",
               fontWeight: 700,
               fontSize: 20,
-              paddingTop: 10
+              paddingTop: 10,
             }}
           >
             {weatherData?.list[0]?.weather[0]?.description}
